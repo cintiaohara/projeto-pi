@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="Simulador Financeiro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+                                                                   
+   <div style=" text-align: center;">
+    
+   <b> <h1>Simulador Financeiro</h1></b>
+    Média de Produção por safra em kg: <input type="text" id="input_producao">  <br>
+    Valor/(kg) dos morangos: <input type="text" id="input_valormorango"> <br>
+
+    <br>
+    Perda em kg da safra por variação de temperatura: <input type="text" id="input_safra"> <br>
+    Perda em kg da safra por irrigação inadequada: <input type="text" id="input_defict"> <br>
+    <br>
+    Custos operacional por safra:<input type="text" id="input_operacional"><br>
+    Custo de irrigação por safra: <input type="text" id="input_irrigacao"><br><br>
+
+    <button onclick="calcular()"> Calcular </button> <br>
+    <div id="div_mensagem"></div></div>
+    
+</body>
+
+</html>
+
+<script>
+
+
+    var producao = 0;
+    var valormorango = 0;
+    var perdasafra = 0;
+    var perdairrigacao = 0;
+    var custooperacional = 0;
+    var custoirrigacao = 0;
+
+
+    function calcular() {
+
+
+        var producao = Number(input_producao.value);
+        var valormorango = Number(input_valormorango.value);
+        var perdasafra = Number(input_safra.value);
+        var perdairrigacao = Number(input_defict.value);
+        var custooperacional = Number(input_operacional.value);
+        var custoirrigacao = Number(input_irrigacao.value);
+        
+
+        var bruto = producao * valormorango;
+        var perdas = (perdasafra + perdairrigacao) * valormorango;
+        var perdaoperacional = custooperacional + custoirrigacao;
+        var totalperdas = perdas +  custooperacional;
+
+        var liquido = bruto - totalperdas;
+        var percentual = ((bruto - liquido) / bruto * 100);
+
+
+
+
+
+        div_mensagem.innerHTML = (`<br><br>
+        Seu lucro bruto  é de: R$ ${bruto} 
+        Houve uma perda da produção de: R$ ${perdas} <br>
+        O custo da operação é de: R$ ${perdaoperacional} <br><br>
+        
+        Seu lucro líquido é de: R$ ${liquido} <br> 
+        O que resulta um percentual de perda de ${percentual}% sobre os lucros.`);
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+</script>
